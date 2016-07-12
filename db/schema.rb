@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522094142) do
+ActiveRecord::Schema.define(version: 20160708053255) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,20 +19,6 @@ ActiveRecord::Schema.define(version: 20160522094142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "favorites", ["created_at"], name: "index_favorites_on_created_at"
-  add_index "favorites", ["tweet_id"], name: "index_favorites_on_tweet_id"
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
-
-  create_table "follows", force: :cascade do |t|
-    t.integer  "follower_id"
-    t.integer  "inverse_follower_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id"
-  add_index "follows", ["inverse_follower_id"], name: "index_follows_on_inverse_follower_id"
 
   create_table "tweets", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,16 +28,21 @@ ActiveRecord::Schema.define(version: 20160522094142) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",            null: false
-    t.string   "crypted_password"
-    t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "screen_name"
-    t.string   "bio"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

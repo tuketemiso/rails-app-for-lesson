@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login
   # GET /users
   # GET /users.json
   def index
@@ -10,7 +9,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
   end
   def favorites
     @user = User.find(params[:id])
@@ -83,3 +81,11 @@ class UsersController < ApplicationController
       params.fetch(:user, {})
     end
 end
+
+
+# ここは丸々作らない
+
+
+
+
+

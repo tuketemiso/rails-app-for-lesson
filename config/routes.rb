@@ -1,22 +1,18 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users
+
   resources :users
-  resource :registrations, only: [:new, :create]
-  resource :sessions, only: [:new, :create, :destroy]
-  resource :settings, only: [:edit, :update]
-  root to: 'registrations#new'
   resources :tweets do
     resource :favorites, only:[:create, :destroy]
-    get :timeline, on: :collection
   end
 
   resources :users, only: [:index, :show] do
-    resource :follows, only: [:create, :destroy]
     get :favorites, on: :member
-    get :follows, on: :member
-    get :followers, on: :member
   end
+
+root "tweets#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,16 +1,10 @@
 class TweetsController < ApplicationController
-  before_filter :require_login, except: [:index]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   # GET /tweets
   # GET /tweets.json
   def index
     @tweets = Tweet.all
-    @tweet = Tweet.new
-  end
-
-  def timeline
-    @tweets = Tweet.eager_load(user: :inverse_follows).where(follows: { follower_id: current_user.id })
     @tweet = Tweet.new
   end
 
@@ -82,3 +76,14 @@ class TweetsController < ApplicationController
       params.require(:tweet).permit(:content)
     end
 end
+
+
+# timelineを除き全て作らせる
+# 別にscaffold使っても良い
+
+
+
+
+
+
+

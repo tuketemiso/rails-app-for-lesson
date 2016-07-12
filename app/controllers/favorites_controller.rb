@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
- before_filter :require_login
 
  def create
  	@tweet = Tweet.find(params[:tweet_id])
@@ -17,3 +16,8 @@ class FavoritesController < ApplicationController
  	redirect_to request.referer, notice: "お気に入りを解除しました。"
  end
 end
+
+
+# 全部作らせる
+# アクションから
+# refererはしなくて良い
