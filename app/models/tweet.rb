@@ -11,3 +11,5 @@ class Tweet < ActiveRecord::Base
 		favorites.where(user_id: user.try(:id)).exists?
 	end
 end
+
+# ここもバリデーションなし、favorited_by?なし

@@ -2,8 +2,24 @@
   <div class="list-group">
     <div class="list-group-item user-list">
       <h2>ユーザー一覧</h2>
-      <%= render partial: "users/user", collection: @users %>
+        <% @user.each do |u|%>
+        <div class="list-group-item">
+        	<h4 class="user">
+			  <span class="user-name">
+			     <%= link_to u.email, user_path(u)%>
+			  </span>
+			  <span class="user-id">
+			 	 <%= "@#{u.email}"%>
+			  </span>
+			</h4>
+			  <div class="bio">
+			 	<%#= u.bio%>
+			  </div>
+	        </div>
+		<% end %>
     </div>
   </div>
 </div>
+
+<!-- indexあってもいいかなぁ -->
 

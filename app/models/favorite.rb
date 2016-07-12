@@ -5,3 +5,5 @@ class Favorite < ActiveRecord::Base
 	validates :user_id, uniqueness: { scope: :tweet_id }
 	validates :tweet, presence: true
 end
+
+#バリデーションなしで書いてもらう

@@ -3,13 +3,13 @@
 			<div class="alert alert-info"><%=notice%></div>
 		<% end %>
 		<span class="user-name">
-			<%= render_user_screen_name(@user) %>
+			<%#= render_user_screen_name(@user) %>
 		</span>
 		<span class="user-id">
-			<%= "@#{@user.name}"%>
+			<%#= "@#{@user.name}"%>
 		</span>
 		<div class="bio">
-			<%= @user.bio%>
+			<%#= @user.bio%>
 		</div>
 	</div>
 	<ul class="nav nav-tabs nav-justified">
@@ -24,24 +24,30 @@
 		<% end %>	
 		</li>		
 		<li {class: action_name == "follow" ? "active" : nil}>
-		<%= link_to follows_user_path(@user) do %>
+		<%#= link_to follows_user_path(@user) do %>
+		<a href="">
 			<div class="text">
 				フォロー
 			</div>
 			<div class="num">
-			 <%= "#{@user.inverse_followers.count}"%>
+			 0
 			</div>
-		<% end %>
+		</a>
+			
+		<%# end %>
 		</li>		
 		<li {class: action_name == "follwer" ? "active" : nil}>
-		<%= link_to followers_user_path(@user) do %>
+		<%#= link_to followers_user_path(@user) do %>
+		<a href="">
 			<div class="text">
 				フォロワー
 			</div>
 			<div class="num">
-			 <%= "#{@user.followers.count}"%>
+			 0
 			</div>
-		<% end %>
+		</a>
+			
+		<%# end %>
 		</li>		
 		<li {class: action_name == "favorites" ? "active" : nil}>
 		<%= link_to favorites_user_path(@user) do %>
