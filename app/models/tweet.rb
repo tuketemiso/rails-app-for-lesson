@@ -1,15 +1,13 @@
 class Tweet < ActiveRecord::Base
+	# userと紐付ける
 	belongs_to :user
-	has_many :favorites, dependent: :destroy
-	validates :user,presence:true
-	validates :content, presence:true, length: {in: 1..140}
 
+
+# -------------------------------------------------------- 優秀すぎる人用に残しておく
+	has_many :favorites
 	default_scope -> { order(created_at: :desc) }
-
-
-	def favorited_by? user
+	def favorited_by?(user)
 		favorites.where(user_id: user.try(:id)).exists?
 	end
+# -----------------------------------------------------------
 end
-
-# ここもバリデーションなし、favorited_by?なし
