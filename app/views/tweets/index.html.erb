@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-xs-4 left-content">
 
-      <!-- singed_in?で制御かける -->
+      <!-- singed_in?を使ってログインした人しか見れないようにしましょう -->
         <% if signed_in? %>
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="user">
                 <span class="user-name">
-                <!-- emailの表示 -->
+                <!-- この下にcurrent_userのemailを表示しよう -->
                   <%= current_user.email %>
                 </span>
               </div>
@@ -21,20 +21,15 @@
                       つぶやき
                     </div>
                     <div class="num">
-                      <!-- count使って数字だす -->
+                      <!-- countを使ってcurrent_userのツイートの数を出しましょう -->
                       <%= current_user.tweets.count %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <% @tweet.errors.full_messages.each do |message| %>
-              <div class="alert alert-danger">
-                <%= message %>
-              </div>
-            <% end %>
 
-            <!-- form_forをこの位置に作ってもらう -->
+            <!-- form_forを使ってつぶやくためのフォームを作る -->
             <%= form_for @tweet do |f|%>
               <div class="form-group new-tweet">
               <!-- formヘルパー作る -->
@@ -42,22 +37,19 @@
                 <%=f.submit "つぶやく", class: "btn btn-success"%>
               </div>
             <% end %>
+            <!-- form_forをendで閉じる -->
           </div>
         <% end %>
+        <!-- signed_in?のif文をendで閉じる -->
       </div>
       <div class="col-xs-8 right-content">
-        <% if notice %>
-          <div class="alert alert-info">
-            <%= notice %>
-          </div>
-        <% end %>
         <div class="list-group">
-        <!-- この下にeach使ってツイート一覧だす -->
+        <!-- @tweetsにeachメソッドを用いてレコード一覧を表示しましょう -->
           <% @tweets.each do |t|%>
             <div class="list-group-item">
               <h4 class="user">
                 <span class="user-name">
-                <!-- emailの表示 -->
+                <!-- ブロック変数を使ってツイートに紐付いたUserのemailの表示 -->
                   <%= t.user.email %>
                 </span>
                 <span class="time pull-right">
@@ -67,23 +59,28 @@
               </h4>
               <div class="tweet-content">
                 <p>
-              <!-- ツイートのcontentの表示 -->
+              <!-- ツイートのcontentを表示しよう -->
                   <%= t.content %>
                 </p>
+
+                <!-- お気に入りボタンの実装（優秀者用） -->
                 <div class="content-footer">
-                <!-- 優秀者用 -->
+                <!-- 発展問題 -->
+                <!-- favorited_by?を使ってif文でデータの状態によって表示するテキストを変えましょう -->
                   <% if t.favorited_by? current_user %>
-                  <!-- 優秀者用 -->
+                  <!-- 優秀者用発展問題 -->
+                  <!-- お気に入り解除ボタンの設置 -->
                     <%= link_to "お気に入りの解除", tweet_favorites_path(t), method: :delete %>
                   <% else %>
-                  <!-- 優秀者用 -->
+                  <!-- 優秀者用発展問題 -->
+                  <!-- お気に入り登録するボタンの設置 -->
                     <%= link_to "お気に入りの登録", tweet_favorites_path(t), method: :post %>
                   <% end %>
                 </div>
               </div>
             </div>
           <% end %>
-        <!-- each終わり -->
+        <!-- each終わりendで閉じる -->
       </div>
     </div>
   </div>

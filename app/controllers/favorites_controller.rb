@@ -18,6 +18,4 @@ class FavoritesController < ApplicationController
 end
 
 
-# 優秀すぎる人にだけ作ってもらう（現状考えられないが）
-
-# refererはしなくて良い
+# 優秀者用の発展問題
