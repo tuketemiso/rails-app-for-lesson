@@ -18,6 +18,6 @@ class FavoritesController < ApplicationController
 end
 
 
-# 全部作らせる
-# アクションから
+# 優秀すぎる人にだけ作ってもらう（現状考えられないが）
+
 # refererはしなくて良い

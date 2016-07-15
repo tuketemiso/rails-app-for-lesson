@@ -4,10 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-    has_many :tweets, dependent: :destroy
-    has_many :favorites, dependent: :destroy
+# ツイートと紐付ける
+    has_many :tweets
 
+
+# --------------------------------
+    has_many :favorites # 優秀すぎる人用に残しておく
+# --------------------------------
 end
 
-# deviseのみで何もいじらない
-# validationいらない

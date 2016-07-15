@@ -4,14 +4,20 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users
+
+  # resourcesでなくても良い
   resources :tweets do
     resource :favorites, only:[:create, :destroy]
   end
 
+# ---------------------------------------------
+# いらないが優秀者用に残しておく
+
   resources :users, only: [:index, :show] do
-    get :favorites, on: :member
   end
 
+
+# ---------------------------------------------
 root "tweets#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
