@@ -7,6 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RailsSmapleApp1</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://s3-ap-northeast-1.amazonaws.com/infratop/css/bootstrap.min.css" rel="stylesheet">
@@ -88,26 +91,17 @@
     <!-- Header -->
     <header id="top" class="header">
       <div class="text-vertical-center">
-          <h1>Start Ruby on Rails</h1>
+          <% unless signed_in? %>
+            <h1 style="padding: 40px 0 20px;">Start Ruby on Rails</h1>
+          <% end %>
           <br>
 
-          <div class="col-sm-6 col-sm-offset-3 text-left">
+          <div class="col-sm-8 col-sm-offset-2 text-left">
             <%= yield %>
           </div>
 
         </div>
     </header>
-
-    <!-- About -->
-    
-
-    <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-   
-
-    <!-- Callout -->
-
-
 
     <!-- Footer -->
     <footer>
