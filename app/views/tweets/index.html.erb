@@ -1,90 +1,103 @@
 <div id="tweets-content">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-4 left-content">
-
-      <!-- singed_in?で制御かける -->
-        <% if signed_in? %>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="user">
-                <span class="user-name">
-                <!-- emailの表示 -->
+  <div class="row">
+    <div class="col-sm-4 left-content">
+      <!-- ↓singed_in?を使ってログインした人しか見れないようにしましょう -->
+      <% if signed_in? %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="user">
+              <span class="user-name">
+                <strong>
+                  <!-- ↓current_userのemailを表示しよう -->
                   <%= current_user.email %>
-                </span>
-              </div>
-                
-              <div class="user-activity">
-                <div class="row">
-                  <div class="col-xs-12 tweets-num">
-                    <div class="text">
-                      つぶやき
-                    </div>
-                    <div class="num">
-                      <!-- count使って数字だす -->
-                      <%= current_user.tweets.count %>
-                    </div>
+                </strong>
+              </span>
+            </div>
+              
+            <div class="user-activity">
+              <div class="row">
+                <div class="col-xs-6 tweets-num text-center">
+                  <div class="text">
+                    総つぶやき数
+                  </div>
+                  <div class="num">
+                    <!-- ↓全てのツイートの数を数える -->
+                    <!-- わからなければ「rails count」で検索！ -->
+                    <%= Tweet.count %>
+                  </div>
+                </div>
+                <div class="col-xs-6 tweets-num text-center">
+                  <div class="text">
+                    あなたのつぶやき
+                  </div>
+                  <div class="num">
+                    <!-- ↓current_userのツイートの数を数える -->
+                    <!-- わからなければ「rails count」で検索！ -->
+                    <%= current_user.tweets.count %>
                   </div>
                 </div>
               </div>
             </div>
-            <% @tweet.errors.full_messages.each do |message| %>
-              <div class="alert alert-danger">
-                <%= message %>
-              </div>
-            <% end %>
+          </div>
 
-            <!-- form_forをこの位置に作ってもらう -->
-            <%= form_for @tweet do |f|%>
-              <div class="form-group new-tweet">
-              <!-- formヘルパー作る -->
-                <%=f.text_area :content, class: "form-control"%>
-                <%=f.submit "つぶやく", class: "btn btn-success"%>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-xs-8 right-content">
-        <% if notice %>
-          <div class="alert alert-info">
-            <%= notice %>
-          </div>
-        <% end %>
-        <div class="list-group">
-        <!-- この下にeach使ってツイート一覧だす -->
-          <% @tweets.each do |t|%>
-            <div class="list-group-item">
-              <h4 class="user">
-                <span class="user-name">
-                <!-- emailの表示 -->
-                  <%= t.user.email %>
-                </span>
-                <span class="time pull-right">
-                  <%= distance_of_time_in_words_to_now(t.created_at)%>
-                </span>
-              <div class="clear"></div>
-              </h4>
-              <div class="tweet-content">
-                <p>
-              <!-- ツイートのcontentの表示 -->
-                  <%= t.content %>
-                </p>
-                <div class="content-footer">
-                <!-- 優秀者用 -->
-                  <% if t.favorited_by? current_user %>
-                  <!-- 優秀者用 -->
-                    <%= link_to "お気に入りの解除", tweet_favorites_path(t), method: :delete %>
-                  <% else %>
-                  <!-- 優秀者用 -->
-                    <%= link_to "お気に入りの登録", tweet_favorites_path(t), method: :post %>
-                  <% end %>
-                </div>
-              </div>
+          <!-- ↓form_forを使ってつぶやくためのフォームを作る -->
+          <%= form_for(@tweet) do |f| %>
+            <div class="form-group new-tweet">
+              <!-- ↓text_areaを生成 -->
+              <%= f.text_area :content, class: "form-control"%>
+              <!-- ↓submitを生成 -->
+              <%= f.submit "つぶやく", class: "btn btn-success"%>
             </div>
           <% end %>
-        <!-- each終わり -->
-      </div>
+          <!-- ↑form_forをendで閉じる -->
+        </div>
+      <% end %>
+      <!-- ↑signed_in?のif文をendで閉じる -->
+    </div>
+
+    <!-- ↓ここから右カラム -->
+    <div class="col-sm-8 right-content">
+      <div class="list-group">
+        <!-- ↓eachメソッドを用いてツイート一覧を表示しましょう -->
+        <% @tweets.each do |t|%>
+          <div class="list-group-item">
+            <h4 class="user">
+              <span class="user-name">
+              <!-- ↓ツイートに紐付いたUserのemailの表示 -->
+                <strong><%= t.user.email %></strong>
+              </span>
+              <span class="time pull-right">
+              <!-- ↓ツイートした時間の表示をしてます。 -->
+                <%= distance_of_time_in_words_to_now(t.created_at)%>
+              </span>
+              <div class="clear"></div>
+            </h4>
+            <div class="tweet-content">
+              <p>
+                <!-- ↓ツイートのcontentを表示 -->
+                <%= t.content %>
+              </p>
+              <!-- ↓お気に入りボタンの実装（発展課題） -->
+              <div class="content-footer">
+                <!-- 発展問題 -->
+                <!-- ↓favorited_by?を使ってif文でデータの状態によって表示するテキストを変えましょう -->
+                  <%# if t.favorited_by? current_user %>
+                  <!-- 発展問題 -->
+                  <!-- ↓お気に入り解除ボタンの設置 -->
+                    <%#= link_to "お気に入りの解除", tweet_favorites_path(t), method: :delete %>
+                  <%# else %>
+                  <!-- 発展問題 -->
+                  <!-- ↓お気に入り登録するボタンの設置 -->
+                    <%#= link_to "お気に入りの登録", tweet_favorites_path(t), method: :post %>
+                  <%# end %>
+               </div>
+              <!-- ↑お気に入りボタンの実装（発展課題） -->
+            </div>
+          </div>
+        <% end %>
+        <!-- ↑each終わり  endで閉じる -->
+      <!-- ↓ページネーションするための記述をしてください -->
+      <%= paginate @tweets %>
     </div>
   </div>
 </div>

@@ -1,38 +1,44 @@
 class TweetsController < ApplicationController
+  #before_actionを用いてログインしていなければログイン画面へ返す
+  # ヒント: authenticate_〇〇!（deviseのヘルパーメソッド）
 
   def index
-    # allを使ってTweetの全レコードの取得
-    @tweets = Tweet.all
-    # newを使ってform_forに渡すインスタンスを生成
+    # allを使ってTweetの全レコードの取得しインスタンス変数に格納
+      #→ ページングする場合は...  →  参照：「ページング機能を実装しよう」
+        #→  並び順かえたい場合は...  →  「rails order」で検索
+    @tweets = Tweet.order(created_at: :desc)
+              .page(params[:page]).per(7)
+              
+    # form_forに渡すインスタンスを生成
     @tweet = Tweet.new
   end
 
   def create
-    # パラメーターを元にインスタンスを生成
+    # ストロングパラメーターを元にインスタンスを生成
     @tweet = Tweet.new(tweet_params)
-    # 投稿したユーザーに紐付ける
+
+    # 投稿したuser_idをtweetのuser_idカラムにセット　→　参照：「[railsブログを作ろう②]ユーザーとポストを紐付けよう！」
     @tweet.user_id = current_user.id
 
-    if @tweet.save
-      #リダイレクト書いてもらう
-      redirect_to tweets_url
-    else
-      # 失敗した時にrenderしてもらう
-      @tweets = Tweet.all
-      render :index
-    end
+    # データベースへ保存する  →  参照：week2「データの保存、抽出」
+    @tweet.save
+    # ツイート一覧へリダイレクト　→　参照：week2「コントローラーの様々なメソッドを学ぶ」
+    redirect_to tweets_path
   end
 
 
   def destroy
-    @tweet = Tweet.find(params[:id])
-    # destroy使ってレコードの削除
+    # レコードを１件取得　→ 参照：week2「データの保存、抽出」
+    @tweet = Tweet.find(params[:id])  
+    # 取得したレコードの削除　→  参照：week2「データの保存、抽出」
     @tweet.destroy
-    # リダイレクトしてもらう
+    # ツイート一覧へリダイレクト　→　参照：week2「簡易掲示板を作ろう３」
     redirect_to tweets_url, notice: 'Tweet was successfully destroyed.'
   end
 
+  # ここからprivateメソッド
   private
+    #ストロングパラメーターを設定
     def tweet_params
       params.require(:tweet).permit(:content)
     end

@@ -3,11 +3,12 @@ class Tweet < ActiveRecord::Base
 	belongs_to :user
 
 
-# -------------------------------------------------------- 優秀すぎる人用に残しておく
-	has_many :favorites
-	default_scope -> { order(created_at: :desc) }
-	def favorited_by?(user)
-		favorites.where(user_id: user.try(:id)).exists?
-	end
+# -------------------------------------------------------- 
+#発展課題
+	# has_many :favorites
+
+	# def favorited_by?(user_id)
+	# 	favorites.where(user_id: user_id).exists?
+	# end
 # -----------------------------------------------------------
 end
