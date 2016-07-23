@@ -11,14 +11,14 @@ Rails.application.routes.draw do
 # ---------------------------------------------
 # 発展課題
   # resourcesを制限する場合
-  # resources :users, only: [:index, :show] do
-  # end
+    # resources :users, only: [:index, :show] do
+    # end
 
-#発展課題
-#お気に入り機能をツイートに紐付ける場合  
-  # resources :tweets do
-  #   resource :favorites
-  # end
+
+  #お気に入り機能をツイートに紐付ける場合  
+    # resources :tweets do
+      # resource :favorites
+    # end
 # ---------------------------------------------
 
 

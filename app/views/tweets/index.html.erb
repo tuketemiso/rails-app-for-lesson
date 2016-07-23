@@ -1,7 +1,7 @@
 <div id="tweets-content">
   <div class="row">
     <div class="col-sm-4 left-content">
-    <!-- ↓singed_in?を使ってログインした人しか見れないようにしましょう -->
+      <!-- ↓singed_in?を使ってログインした人しか見れないようにしましょう -->
       <% if signed_in? %>
         <div class="panel panel-default">
           <div class="panel-body">
@@ -80,14 +80,14 @@
               <!-- ↓お気に入りボタンの実装（発展課題） -->
               <div class="content-footer">
                 <!-- 発展問題 -->
-                <!-- favorited_by?を使ってif文でデータの状態によって表示するテキストを変えましょう -->
+                <!-- ↓favorited_by?を使ってif文でデータの状態によって表示するテキストを変えましょう -->
                   <%# if t.favorited_by? current_user %>
                   <!-- 発展問題 -->
-                  <!-- お気に入り解除ボタンの設置 -->
+                  <!-- ↓お気に入り解除ボタンの設置 -->
                     <%#= link_to "お気に入りの解除", tweet_favorites_path(t), method: :delete %>
                   <%# else %>
                   <!-- 発展問題 -->
-                  <!-- お気に入り登録するボタンの設置 -->
+                  <!-- ↓お気に入り登録するボタンの設置 -->
                     <%#= link_to "お気に入りの登録", tweet_favorites_path(t), method: :post %>
                   <%# end %>
                </div>
