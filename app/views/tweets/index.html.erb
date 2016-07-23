@@ -41,7 +41,7 @@
           </div>
 
           <!-- ↓form_forを使ってつぶやくためのフォームを作る -->
-          <%= form_for(@tweet) do |f|%>
+          <%= form_for(@tweet) do |f| %>
             <div class="form-group new-tweet">
               <!-- ↓text_areaを生成 -->
               <%= f.text_area :content, class: "form-control"%>
@@ -95,8 +95,8 @@
             </div>
           </div>
         <% end %>
-        <!-- ↑each終わりendで閉じる -->
-      <!-- ↓ページネーション -->
+        <!-- ↑each終わり  endで閉じる -->
+      <!-- ↓ページネーションするための記述をしてください -->
       <%= paginate @tweets %>
     </div>
   </div>
