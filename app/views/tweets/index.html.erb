@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-sm-4 left-content">
       <!-- ↓singed_in?を使ってログインした人しか見れないようにしましょう -->
-      <% if signed_in? %>
+      
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="user">
               <span class="user-name">
                 <strong>
                   <!-- ↓current_userのemailを表示しよう -->
-                  <%= current_user.email %>
+
                 </strong>
               </span>
             </div>
@@ -23,7 +23,7 @@
                   <div class="num">
                     <!-- ↓全てのツイートの数を数える -->
                     <!-- わからなければ「rails count」で検索！ -->
-                    <%= Tweet.count %>
+
                   </div>
                 </div>
                 <div class="col-xs-6 tweets-num text-center">
@@ -33,7 +33,7 @@
                   <div class="num">
                     <!-- ↓current_userのツイートの数を数える -->
                     <!-- わからなければ「rails count」で検索！ -->
-                    <%= current_user.tweets.count %>
+
                   </div>
                 </div>
               </div>
@@ -41,17 +41,17 @@
           </div>
 
           <!-- ↓form_forを使ってつぶやくためのフォームを作る -->
-          <%= form_for(@tweet) do |f| %>
+
             <div class="form-group new-tweet">
               <!-- ↓text_areaを生成 -->
-              <%= f.text_area :content, class: "form-control"%>
+
               <!-- ↓submitを生成 -->
-              <%= f.submit "つぶやく", class: "btn btn-success"%>
+
             </div>
-          <% end %>
+
           <!-- ↑form_forをendで閉じる -->
         </div>
-      <% end %>
+
       <!-- ↑signed_in?のif文をendで閉じる -->
     </div>
 
@@ -59,12 +59,15 @@
     <div class="col-sm-8 right-content">
       <div class="list-group">
         <!-- ↓eachメソッドを用いてツイート一覧を表示しましょう -->
-        <% @tweets.each do |t|%>
+
           <div class="list-group-item">
             <h4 class="user">
               <span class="user-name">
-              <!-- ↓ツイートに紐付いたUserのemailの表示 -->
-                <strong><%= t.user.email %></strong>
+              
+                <strong>
+                  <!-- ↓ツイートに紐付いたUserのemailの表示 -->
+
+                </strong>
               </span>
               <span class="time pull-right">
               <!-- ↓ツイートした時間の表示をしてます。 -->
@@ -75,7 +78,7 @@
             <div class="tweet-content">
               <p>
                 <!-- ↓ツイートのcontentを表示 -->
-                <%= t.content %>
+
               </p>
               <!-- ↓お気に入りボタンの実装（発展課題） -->
               <div class="content-footer">
@@ -96,8 +99,10 @@
           </div>
         <% end %>
         <!-- ↑each終わり  endで閉じる -->
+      
       <!-- ↓ページネーションするための記述をしてください -->
-      <%= paginate @tweets %>
+
+
     </div>
   </div>
 </div>

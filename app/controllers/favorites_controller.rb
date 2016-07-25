@@ -1,29 +1,28 @@
 class FavoritesController < ApplicationController
 
- def create
- 	# tweetのレコード１件を取得し、インスタンス変数に格納
+	def create
+		# tweetのレコード１件を取得し、インスタンス変数に格納
 
- 	# 格納したレコードを元にログインしているユーザーのfavoritesインスタンスを生成
+		# 格納したレコードを元にログインしているユーザーのfavoritesインスタンスを生成
 
- 	# 生成したインスタンスを保存
- 	if 
- 		# tweets#indexへリダイレクト
-
- 	else
+		# 生成したインスタンスを保存
+		if 
 		# tweets#indexへリダイレクト
- 	
- 	end
- end
 
- def destroy
- 	#ログインしているユーザーに紐付いたfavoritesの中からtweet_idが等しいものを１件取得
+		else
+		# tweets#indexへリダイレクト
 
- 	# destroyメソッドで削除
+		end
+	end
 
- 	#  tweets#indexへリダイレクト
+	def destroy
+		#ログインしているユーザーに紐付いたfavoritesの中からtweet_idが等しいものを１件取得
 
- end
-end
+		# destroyメソッドで削除
+
+		#  tweets#indexへリダイレクト
+
+	end
 
 
 # 発展課題
